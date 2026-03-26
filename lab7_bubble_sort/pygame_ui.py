@@ -23,6 +23,7 @@ def run_pygame_visualization(
     values: list[int],
     *,
     delay_ms: int = 40,
+    end_hold_ms: int = 1500,
     config: VisualConfig | None = None,
 ) -> None:
     """
@@ -35,6 +36,8 @@ def run_pygame_visualization(
 
     if delay_ms < 0:
         raise ValueError("delay_ms must be >= 0")
+    if end_hold_ms < 0:
+        raise ValueError("end_hold_ms must be >= 0")
     if not values:
         raise ValueError("values must be non-empty")
 
@@ -53,6 +56,7 @@ def run_pygame_visualization(
 
         running = True
         done = False
+        done_at_ms: int | None = None
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -70,8 +74,20 @@ def run_pygame_visualization(
                     except StopIteration:
                         current_step = None
                         done = True
+                        done_at_ms = pygame.time.get_ticks()
 
-            _draw_frame(screen, font, values, current_step, paused, delay_ms, cfg, done)
+            _draw_frame(
+                screen,
+                font,
+                values,
+                current_step,
+                paused,
+                delay_ms,
+                cfg,
+                done,
+                end_hold_ms,
+                done_at_ms,
+            )
             pygame.display.flip()
 
             # Slow down; still keep the window responsive.
@@ -91,6 +107,8 @@ def _draw_frame(
     delay_ms: int,
     cfg: VisualConfig,
     done: bool,
+    end_hold_ms: int,
+    done_at_ms: int | None,
 ) -> None:
     screen.fill(cfg.background)
 
@@ -143,6 +161,11 @@ def _draw_frame(
     else:
         status = step.kind.upper() if step is not None else "RUNNING"
 
-    msg = f"{status}  (Space: pause, q/Esc: quit)  delay={delay_ms}ms"
+    if done and done_at_ms is not None:
+        elapsed = pygame.time.get_ticks() - done_at_ms
+        remaining = max(0, end_hold_ms - elapsed)
+        msg = f"{status}  (Space: pause, q/Esc: quit)  hold={remaining}ms"
+    else:
+        msg = f"{status}  (Space: pause, q/Esc: quit)  delay={delay_ms}ms"
     text = font.render(msg, True, cfg.text_color)
     screen.blit(text, (10, 10))

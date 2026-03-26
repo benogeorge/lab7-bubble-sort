@@ -12,6 +12,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--renderer", choices=["pygame", "terminal"], default="pygame")
     p.add_argument("--size", type=int, default=50, help="Number of values to sort.")
     p.add_argument("--delay-ms", type=int, default=40, help="Delay between steps/frames in milliseconds.")
+    p.add_argument("--end-hold-ms", type=int, default=1500, help="How long to show the final sorted state.")
     p.add_argument("--seed", type=int, default=None, help="Random seed (for reproducible runs).")
     return p.parse_args()
 
@@ -23,7 +24,7 @@ def main() -> None:
     if args.renderer == "terminal":
         run_terminal_visualization(values, delay_ms=args.delay_ms)
     else:
-        run_pygame_visualization(values, delay_ms=args.delay_ms)
+        run_pygame_visualization(values, delay_ms=args.delay_ms, end_hold_ms=args.end_hold_ms)
 
 
 if __name__ == "__main__":

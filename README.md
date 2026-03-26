@@ -25,6 +25,12 @@ Recommended:
 python .\main.py --renderer pygame --size 40 --delay-ms 40 --seed 123
 ```
 
+To keep the final sorted state visible a bit longer:
+
+```powershell
+python .\main.py --renderer pygame --size 40 --delay-ms 40 --end-hold-ms 3000 --seed 123
+```
+
 Terminal renderer:
 
 ```powershell
