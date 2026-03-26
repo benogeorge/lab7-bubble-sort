@@ -1,26 +1,38 @@
-# Bubble Sort
+# Bubble Sort Visualization (Lab 7)
 
-Starter repository for the lab7 bubble sort project.
+This project visualizes Bubble Sort with a simple Pygame animation.
 
 ## Setup
 
-This repository includes:
+Create and activate a virtual environment, then install dependencies:
 
-- `.github/` with the current Copilot instructions and journal logger agent
-- `.gitignore` for Python and editor artifacts
-- `REPORT.md` for reflection and learning notes
-- `main.py` as the starting point for the bubble sort implementation
+```powershell
+# Use Python 3.12 (pygame wheels are available). If `py` defaults to 3.14 on your machine,
+# forcing 3.12 avoids a source build.
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
 
 ## Run
 
-When the implementation is ready, run it with:
-
 ```powershell
-python .\main.py
+python -m lab7_bubble_sort.main
 ```
 
-If `python` opens the Microsoft Store on your machine, use:
+Optional flags:
 
 ```powershell
-.\run.ps1
+python -m lab7_bubble_sort.main --size 40 --delay-ms 40 --seed 123
 ```
+
+## Controls
+
+- `Space`: pause / resume
+- `q` or `Esc`: quit
+
+## Notes
+
+- The sorting algorithm and the visualization UI are separated:
+  - `lab7_bubble_sort/sort_logic.py`: pure bubble sort logic (yields steps)
+  - `lab7_bubble_sort/pygame_ui.py`: rendering + input handling
