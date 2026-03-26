@@ -24,6 +24,9 @@ CoPilot worked best when I gave it a narrow, testable request, like adding pause
 ## New Concepts or Tools Encountered
 I used Pygame for the graphics layer and pytest for validation. I also had to account for Python version differences on Windows, because Pygame installed cleanly with Python 3.12 but not with the default Python 3.14 environment.
 
+## Acknowledgements
+Thanks to the course materials, the lab instructions, and the contributors whose examples helped shape the final structure of this project. The implementation was easier to finish once the feedback was narrowed into specific, testable steps.
+
 # Report on CoPilot Prompting Experience
 ## Student may pull examples from the JOURNAL.md to illustrate their experience, including specific interactions that were particularly helpful or challenging.
 
@@ -32,6 +35,7 @@ Prompts with concrete constraints worked well, such as "use two different colors
 
 ### Types of prompts that did not work well or failed
 Very broad prompts like "do it all" were only useful after I broke the work into smaller parts. PDF extraction was also unreliable in the sandbox, so I had to work from the visible instructions and the actual repo instead of expecting the document to be machine-readable.
+Another unhelpful pattern was asking for a full solution without naming the exact file or behavior. That usually led to extra back-and-forth, while direct prompts like "update the report section" or "add a pause control" moved much faster.
 
 # Limitations, Hallucinations and Failures
 ## In this section, students will document any instances where CoPilot provided incorrect or misleading information (hallucinations) or where it failed to provide a useful response. They will analyze why these issues occurred and how they impacted their work on the project.
@@ -65,6 +69,9 @@ AI is best used as a fast collaborator, not as a replacement for understanding. 
 ## When should you trust AI? When should you double-check it?
 Trust AI for focused scaffolding and implementation ideas. Double-check anything that changes architecture, dependencies, file layout, or environment setup.
 
+## What I would do differently next time
+I would split the work into smaller deliverables earlier, keep the documentation updated as I go, and verify each step before moving on. That would make the final push much smoother.
+
 # Reflection
 ## Did AI make you faster? Why or why not?
 Yes, mostly because it sped up the boilerplate and helped with repeated structure. It slowed down when I let the scope stay too broad.
@@ -74,3 +81,6 @@ Yes. I felt in control when the code was split into logic, terminal rendering, a
 
 ## Would you use AI the same way next time? What would you change?
 I would split the project into smaller pieces sooner and keep the prompts narrower from the beginning. That would avoid some of the backtracking and cleanup.
+
+# Final Notes
+This project now has a working Bubble Sort visualization, a reusable sort generator, automated tests, and written reflections on the development process. The main lesson was that a small, well-structured codebase is easier to finish than a large, loosely defined one.
